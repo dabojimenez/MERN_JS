@@ -4,3 +4,12 @@ Nodemon
     Y despues agregamos el script en el package.json
         [ "dev": "nodemon index.js"]
         Y en la terminal seria [npm run dev]
+
+Mongoose
+Es un ORM, para MongoDb, y para instalarlo usaremos el sigueinte comando
+    [npm i mongoose]
+    Despues creamos la carpeta llamada {config} y tendra el archvio {db.js}, el cual tendra la configuracion de conexión
+
+Dotenv
+    Esta dependencia la usaremos para acceder a nuestras variables de entorno
+        [npm i dotenv]
