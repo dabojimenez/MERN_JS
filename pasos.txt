@@ -1,0 +1,6 @@
+Nodemon
+    [npm i --save-dev nodemon]
+    Nos ayuda en desarrollo, para noe star reiniciendo cada rato el servidor
+    Y despues agregamos el script en el package.json
+        [ "dev": "nodemon index.js"]
+        Y en la terminal seria [npm run dev]

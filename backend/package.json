@@ -1,11 +1,19 @@
 {
   "name": "apv-backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "Aprendidneod JS fullstack",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "Stalyn Jimenez",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
 }
