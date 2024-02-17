@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 dotenv.config(); // escaneara y buscara el archivo .env
 
 const app = express();
+// Habilitamos la lectura de datos del body
+app.use(express.json());// aqui definimos que le vamos a enviar datos de tipo json
 
 // iniciamos la conexion d ela base de datos
 conectarDB();
