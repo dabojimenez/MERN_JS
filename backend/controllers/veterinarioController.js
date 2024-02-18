@@ -31,7 +31,9 @@ const registrar = async (req, res) => {
 };
 
 const perfil = (req, res) => {
-    res.json({ msg: 'mostrando perfil' });
+    // como ya obtenemso del token los datos y que fueron consumidos en el middleware a la base de datos (accedemos a la sesión que se creo)
+    const { veterinario } = req;
+    res.json({ veterinario });
 };
 
 const confirmar = async (req, res) => {
