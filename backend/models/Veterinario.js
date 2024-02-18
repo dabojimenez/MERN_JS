@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 // Es un enfoque de Code-First
 const veterinarioSchema = mongoose.Schema({
     // el id, automaticamente le asigna el id
-    nombe: {
+    nombre: {
         type: String,
         require: true,
         trim: true, // eliminara automaticamente los espacios en blanco al inicio y al final
