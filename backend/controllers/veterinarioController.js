@@ -1,3 +1,4 @@
+import generarId from "../helpers/generarId.js";
 import generarJWT from "../helpers/generarJWT.js";
 import Veterinario from "../models/Veterinario.js";
 
@@ -85,9 +86,68 @@ const autenticar = async (req, res) => {
     }
 }
 
+const olvidePassword = async (req, res) => {
+    // extraemos el email
+    const { email } = req.body;
+
+    const existeVeterinario = await Veterinario.findOne({email});
+
+    // si no existe enviaremos el sigueinte mensaje
+    if (!existeVeterinario) {
+        const error = new Error('El Usuario no existe');
+        return res.status(403).json({ msg: error.message }); 
+    }
+
+    // Como si existe el usuario, crearemos un token
+    try {
+        existeVeterinario.token = generarId();
+        await existeVeterinario.save();
+        return res.json({ msg: 'Hemos enviado un email con las instrucciones' });
+    } catch (error) {
+        console.log(error);
+    }
+}
+const comprobarToken = async(req, res) => {
+    const { token } = req.params;
+    // buscamos que usuario tiene el token
+    const tokenValido = await Veterinario.findOne({token});
+    if (tokenValido) {
+        // El token es valido, el usuario existe
+        res.json({ msg : 'Token valido y el usuario existe'})
+    }else{
+        const error = new Error('Token no valido');
+        return res.status(400).json({ msg: error.message });
+    }
+}
+const nuevoPassword = async (req, res) => {
+    const { token } = req.params;
+    const { password } = req.body; // El nuevo password que el usuario enviara
+
+    const veterinario = await Veterinario.findOne({token})
+
+    // si no existe el usuario se msotrara el mensaje
+    if (!veterinario) {
+        const error = new Error('Hubo un error');
+        return res.status(400).json({ msg: error.message });
+    }
+
+    try {
+        // Eliminamos el token anterior
+        veterinario.token = null;
+        veterinario.password = password;
+        await veterinario.save();
+        res.json({ msg : 'Password modificado correctamente'});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export {
     registrar,
     perfil,
     confirmar,
-    autenticar
+    autenticar,
+    olvidePassword,
+    comprobarToken,
+    nuevoPassword
 }
