@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import generarId from '../helpers/generarId.js';
 
 // Definimos el schema, este schema, ocntendra toda la estructrua que tendran los datos del modelo de este caso de Veterinario
 // Es un enfoque de Code-First
@@ -30,6 +31,7 @@ const veterinarioSchema = mongoose.Schema({
     },
     token: {
         type: String,
+        default: generarId,
     },
     confirmado: {
         type: Boolean,
