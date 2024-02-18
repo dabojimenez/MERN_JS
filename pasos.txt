@@ -18,3 +18,7 @@ NOTA
     Si se crea con el nombre test, e sporque no se ha definido el nombre d ela base de datos
     Si la base de datos se crea con otro nombre es porque nuestra conexion a la abse de datos ene l .env, esta con ese nombre o de preferencia volver a ver el video.
     485 - Almacenando Registros en la BD
+
+Bcrypt
+    Dependencia que usaremos para el hasheo de passwords
+    [npm install bcrypt]
