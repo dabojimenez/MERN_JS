@@ -55,6 +55,13 @@ veterinarioSchema.pre('save', async function (next) {
 }); // antes de almacenarlo en la BD
 
 
+// Para autenticar al usuario con su password
+// registramos funciones que se ejecuten unicamente en este modelo
+veterinarioSchema.methods.comprobarPassword = async function (passwordFormulario) {
+    // compare => comparara con elq ue esta almacenado en la abse de datos, no lo deshashea, sino que hashea lo que el usuario envia y comprueba
+    return await bcrypt.compare(passwordFormulario, this.password);
+} 
+
 
 // Registramos en mongoose, pasnaodle el nombre con el que se creara y ademas le pasamos el schema/forma que tendran los datos
 const Veterinario = mongoose.model('Veterinario', veterinarioSchema);

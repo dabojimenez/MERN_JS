@@ -7,11 +7,11 @@ const registrar = async (req, res) => {
 
     // Revisar si un usuario ya existe por medio de su email
     // findOne, nos va permitir buscar por los diferentes atributod existentes en la base de datos
-    const existeUsuario = await Veterinario.findOne({email : email});
+    const existeUsuario = await Veterinario.findOne({ email: email });
 
     if (existeUsuario) {
         const error = new Error("Usuario ya registrado");
-        return res.status(400).json({ msg: error.message}); // detenemos la ejecución, cambiamos el tipo de respuesta a 400 y enviamso o devolvemos un mensaje
+        return res.status(400).json({ msg: error.message }); // detenemos la ejecución, cambiamos el tipo de respuesta a 400 y enviamso o devolvemos un mensaje
     }
 
 
@@ -23,23 +23,23 @@ const registrar = async (req, res) => {
 
         // si todo fue correcto, mostraremos el siguiente mensaje o el veterinario creado
         // res.json({msg: 'registrando usuario'});
-        res.json({veterinarioGuardado});
+        res.json({ veterinarioGuardado });
     } catch (error) {
         console.log(error);
     }
 };
 
 const perfil = (req, res) => {
-    res.json({msg: 'mostrando perfil'});
+    res.json({ msg: 'mostrando perfil' });
 };
 
 const confirmar = async (req, res) => {
     const { token } = req.params;
 
-    const usuarioConfirmar = await Veterinario.findOne({token});
+    const usuarioConfirmar = await Veterinario.findOne({ token });
     if (!usuarioConfirmar) {
         const error = new Error('Token no valido');
-        return res.status(400).json({msj : error.message});
+        return res.status(400).json({ msj: error.message });
     }
 
     try {
@@ -48,15 +48,47 @@ const confirmar = async (req, res) => {
         // cambiamos el valor de confirmado a true
         usuarioConfirmar.confirmado = true;
         // guardamos en la base de datos la isntancia modifcada
-        await usuarioConfirmar.save();  
-        res.json({msg : 'Usuario confirmado correctamente'});
+        await usuarioConfirmar.save();
+        res.json({ msg: 'Usuario confirmado correctamente' });
     } catch (error) {
         console.log(error);
     }
 }
 
+const autenticar = async (req, res) => {
+    const { email, password } = req.body;
+    // Comprobar si el usuario existe
+    const usuario = await Veterinario.findOne({ email });
+
+    if (!usuario) {
+        const error = new Error('El usuario no existe');
+        // Le retornamos un Forbidden (403) o un Unauthorized (401)
+        return res.status(403).json({ msg: error.message });
+    }
+
+    // Comprobar si el usuario esta confirmado
+    if (!usuario.confirmado) {
+        const error = new Error('Cuenta sin confirmar');
+        return res.status(403).json({ msg: error.message });
+    }
+
+    // Revisar el apssword
+    if ( await usuario.comprobarPassword(password)) {
+        // Autenticar al usuario con JWT
+    } else {
+        const error = new Error('Password incorrecto');
+        return res.status(403).json({ msg: error.message });
+    }
+
+    
+
+
+    res.json({ msg: 'Autenticando' });
+}
+
 export {
     registrar,
     perfil,
-    confirmar
+    confirmar,
+    autenticar
 }
