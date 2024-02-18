@@ -1,0 +1,28 @@
+Nodemon
+    [npm i --save-dev nodemon]
+    Nos ayuda en desarrollo, para noe star reiniciendo cada rato el servidor
+    Y despues agregamos el script en el package.json
+        [ "dev": "nodemon index.js"]
+        Y en la terminal seria [npm run dev]
+
+Mongoose
+Es un ORM, para MongoDb, y para instalarlo usaremos el sigueinte comando
+    [npm i mongoose]
+    Despues creamos la carpeta llamada {config} y tendra el archvio {db.js}, el cual tendra la configuracion de conexión
+
+Dotenv
+    Esta dependencia la usaremos para acceder a nuestras variables de entorno
+        [npm i dotenv]
+
+NOTA
+    Si se crea con el nombre test, e sporque no se ha definido el nombre d ela base de datos
+    Si la base de datos se crea con otro nombre es porque nuestra conexion a la abse de datos ene l .env, esta con ese nombre o de preferencia volver a ver el video.
+    485 - Almacenando Registros en la BD
+
+Bcrypt
+    Dependencia que usaremos para el hasheo de passwords
+    [npm install bcrypt]
+
+Jsonwebtoken (JWT)
+    Esta dependencia nos permitira generar y comprobar los json web tokens
+    [npm install jsonwebtoken]
