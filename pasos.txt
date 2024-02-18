@@ -22,3 +22,7 @@ NOTA
 Bcrypt
     Dependencia que usaremos para el hasheo de passwords
     [npm install bcrypt]
+
+Jsonwebtoken (JWT)
+    Esta dependencia nos permitira generar y comprobar los json web tokens
+    [npm install jsonwebtoken]
