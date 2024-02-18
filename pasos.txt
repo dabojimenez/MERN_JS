@@ -26,3 +26,29 @@ Bcrypt
 Jsonwebtoken (JWT)
     Esta dependencia nos permitira generar y comprobar los json web tokens
     [npm install jsonwebtoken]
+
+REACT
+    [npm init vite@latest]
+    Con este comando se creara la palicacion de escritorio de react o vue
+
+Instlar Talwincss
+    [npm i --save-dev tailwindcss postcss autoprefixer]
+    Para isntalar tailwindcss
+    Nota: npx permite instalar ciertos paquetes sin instalar nada
+        [npx tailwindcss init -p]
+        Esto para crear los archivos de tailwindcss y realizaremos ajustes en el archivo tailwind.config.js
+            /** @type {import('tailwindcss').Config} */
+            export default {
+            content: [
+                "./index.html",
+                "./src/**/*.{js,ts,jsx,tsx}",
+            ],
+            theme: {
+                extend: {},
+            },
+            plugins: [],
+            }
+
+React Router DOM 6
+    Esta libreria nos permite tener varias paginas y poder tener varias paginas
+    [npm i react-router-dom]
