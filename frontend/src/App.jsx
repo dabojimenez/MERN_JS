@@ -1,8 +1,40 @@
-
+import {
+  BrowserRouter, // Siempre debe estar, ya que es el padre
+  Routes, // Permite agrupar diferentes rutas
+  Route  // Es para una ruta en especifico
+} from "react-router-dom";
+import AuthLayout from "./layout/AuthLayout";
+import Login from "./pages/Login";
+import OlvidePassword from "./pages/OlvidePassword";
+import Registrar from "./pages/Registrar";
+import ConfirmarCuenta from "./pages/ConfirmarCuenta";
 function App() {
 
   return (
-    <h1>Hola vit</h1>
+    <BrowserRouter>
+      <Routes>
+      {/* Route, lo podmeos definir como ciertos layouts para determinado grupo de páginas. Podemos definir cierto diseno en comun */}
+      {/* element => va a ser la pagina principal y cargara lo que se le pasa en el element*/}
+      {/* Route, nos permite agrupar lo que este relacionado con la autenticacion */}
+      {/* AuthLayout, es el componente padre y sus hijos pueden tener su diseno individial, biene a ser como el master pages */}
+        <Route path="/" element={<AuthLayout/>}>
+        {/* index, le dice que es el primer componente */}
+          <Route index element={<Login/>} />
+          <Route path="olvide-password" element={<OlvidePassword/>}/>
+          <Route path="registrar" element={<Registrar/>}/>
+          <Route path="confirmar/:id" element={<ConfirmarCuenta/>}/>
+        </Route>
+
+        {/* Podremos tener un dasbor totalmente diferente al del area publica de esta forma */}
+        {/* <Route path="/admin" element={<AuthLayout/>}>
+          <Route index element={<Login/>} />
+          <Route path="olvide-password" element={<OlvidePassword/>}/>
+          <Route path="registrar" element={<Registrar/>}/>
+          <Route path="confirmar/:id" element={<ConfirmarCuenta/>}/>
+        </Route> */}
+
+      </Routes>
+    </BrowserRouter>
   )
 }
 
