@@ -57,7 +57,7 @@ const Registrar = () => {
 
           <input
             type='submit'
-            value={'Iniciar Sesión'}
+            value={'Crear Cuenta'}
             className='bg-indigo-700 w-full py-3 px-10 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-indigo-800 md:w-auto '
           >
           </input>
