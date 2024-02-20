@@ -1,31 +1,38 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
+import Alerta from '../components/Alerta';
 
 const Registrar = () => {
   // definimso el state para nombre y asi con los campos del formulario
-  const [ nombre, setNombre ] = useState('');
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
-  const [ repetirPassword, setRepetirPassword ] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [repetirPassword, setRepetirPassword] = useState('');
 
+  const [alerta, setAlerta] = useState({});
   const handleSubmit = e => {
     e.preventDefault();
     if ([nombre, email, password, repetirPassword].includes('')) {
-      console.log('existem campos vacios');
+      setAlerta({ msg: 'Hay campos vacios', error: true });
       return;
     }
 
     if (password !== repetirPassword) {
-      console.log('los passwords no son iguales');
+      setAlerta({ msg: 'Los Password no son iguales', error: true });
       return;
     }
 
     if (password.length) {
-      console.log('el password es muy corto, agregar minimo 6 caracteres');
+      setAlerta({ msg: 'El password es muy corto, agregar minimo 6 caracteres', error: true });
       return;
     }
+
+    setAlerta({});
+
+    // Crear al usuario en la api
   }
 
+  const { msg } = alerta;
 
   return (
     <>
@@ -34,6 +41,15 @@ const Registrar = () => {
       </div>
 
       <div className='mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white'>
+
+        {/* Mostraremos de ofrma condicional, si existe mendaje se muestra si no existe mensaje no se muestra */}
+        {/* Alerta que se mostrara en la pantalla */}
+        {msg &&
+          <Alerta
+            alerta={alerta}
+          />
+        }
+
         <form
           onSubmit={handleSubmit}
         >
