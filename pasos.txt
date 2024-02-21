@@ -52,3 +52,11 @@ Instlar Talwincss
 React Router DOM 6
     Esta libreria nos permite tener varias paginas y poder tener varias paginas
     [npm i react-router-dom]
+
+Axios
+    libreria que permite comunicarnos con una api a diferencia de fetch, que es nativa del navegador.
+    [npm install axios]
+
+Cors
+    Libreria que nos ayudara agregar los CORS en nuesra aplicacion backend.
+    [npm install cors]

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Alerta from '../components/Alerta';
+import axios from 'axios';
 
 const Registrar = () => {
   // definimso el state para nombre y asi con los campos del formulario
@@ -10,7 +11,8 @@ const Registrar = () => {
   const [repetirPassword, setRepetirPassword] = useState('');
 
   const [alerta, setAlerta] = useState({});
-  const handleSubmit = e => {
+
+  const handleSubmit = async e => {
     e.preventDefault();
     if ([nombre, email, password, repetirPassword].includes('')) {
       setAlerta({ msg: 'Hay campos vacios', error: true });
@@ -22,7 +24,7 @@ const Registrar = () => {
       return;
     }
 
-    if (password.length) {
+    if (password.length < 6) {
       setAlerta({ msg: 'El password es muy corto, agregar minimo 6 caracteres', error: true });
       return;
     }
@@ -30,6 +32,23 @@ const Registrar = () => {
     setAlerta({});
 
     // Crear al usuario en la api
+    try {
+      const url = 'http://localhost:4000/api/veterinarios';
+      // axios.post => envia una peticion post
+      // axios() => es una peticion get por defecto
+      // el segundo argumento que toma es la data, pero podemos crear un objeto al vuelo
+      await axios.post(url, { nombre, email, password });
+      // Los CORS es una forma de proteger la API y esto se define en el bacend
+      setAlerta({
+        msg : 'Creado Correctamente, revisa tu email',
+        error : false
+      })
+    } catch (error) {
+      setAlerta({
+        msg : error.response.data.msg,
+        error : true
+      })
+    }
   }
 
   const { msg } = alerta;
