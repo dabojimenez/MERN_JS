@@ -60,3 +60,8 @@ Axios
 Cors
     Libreria que nos ayudara agregar los CORS en nuesra aplicacion backend.
     [npm install cors]
+
+NodeMail
+    Libreria usada para poder enviar los corres electronicos
+    [npm install nodemailer]
+    Video 525 Primeros pasos para enviar un email de Confirmación de Cuenta y Video 526. Enviando el Email

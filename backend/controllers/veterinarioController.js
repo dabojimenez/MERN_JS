@@ -1,3 +1,4 @@
+import emailRegistro from "../helpers/emailRegistro.js";
 import generarId from "../helpers/generarId.js";
 import generarJWT from "../helpers/generarJWT.js";
 import Veterinario from "../models/Veterinario.js";
@@ -5,7 +6,7 @@ import Veterinario from "../models/Veterinario.js";
 const registrar = async (req, res) => {
     // Obtener los datos del body, o información de un formulario
     // IMPORTANTE, HABILITAR LA LECTURA DE DATOS EN EL index.js, el que es de raiz
-    const { email, password } = req.body;
+    const { email, nombre } = req.body;
 
     // Revisar si un usuario ya existe por medio de su email
     // findOne, nos va permitir buscar por los diferentes atributod existentes en la base de datos
@@ -22,6 +23,13 @@ const registrar = async (req, res) => {
         const veterinario = new Veterinario(req.body); // Le pasamso todo el objeto que recibimos y solo hara match con los campos que tengamos definido en el modelo
 
         const veterinarioGuardado = await veterinario.save(); // save, es util si vamos a guardar en la base de datos o si tenemos un objeto, lo modificamso y despues lo guardamos
+
+        // Si ya todo fue correcto y no entro en el catch, procedmeos a enviar el email
+        emailRegistro({
+            email,
+            nombre,
+            token: veterinarioGuardado.token
+        });
 
         // si todo fue correcto, mostraremos el siguiente mensaje o el veterinario creado
         // res.json({msg: 'registrando usuario'});
