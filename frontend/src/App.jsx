@@ -10,6 +10,9 @@ import Registrar from "./pages/Registrar";
 import ConfirmarCuenta from "./pages/ConfirmarCuenta";
 function App() {
 
+  // Obtencion de los valores de variables de entorno
+  // console.log(import.meta.env.VITE_BACKEND_URL); // valida
+  // console.log(import.meta.env.IMAGENES_URL); // No valida
   return (
     <BrowserRouter>
       <Routes>

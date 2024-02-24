@@ -3,7 +3,7 @@ backend/node_modules
 backend/.env
 
 #  Para el frontend
-
+frontend/.env
 
 # Logs
 frontend/logs
