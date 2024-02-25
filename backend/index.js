@@ -16,7 +16,7 @@ app.use(express.json());// aqui definimos que le vamos a enviar datos de tipo js
 conectarDB();
 
 // Implementando los CORS
-const dominiosPermitidos = ['http://localhost:5173']
+const dominiosPermitidos = [process.env.FRONTEND_URL];
 const corsOptions = {
     origin: function (origin, callback) {
         // si la url que esta realizando lapeticion a la API, esta dentro de dominios permitidos, le permitiremos el request
