@@ -10,6 +10,8 @@ import Registrar from "./pages/Registrar";
 import ConfirmarCuenta from "./pages/ConfirmarCuenta";
 import NuevoPassword from "./pages/NuevoPassword";
 import { AuthProvider } from './context/AuthProvider';
+import RutaProtegida from "./layout/RutaProtegida";
+import AdministrarPacientes from "./pages/AdministrarPacientes";
 
 function App() {
 
@@ -26,7 +28,7 @@ function App() {
           {/* Route, nos permite agrupar lo que este relacionado con la autenticacion */}
           {/* AuthLayout, es el componente padre y sus hijos pueden tener su diseno individial, biene a ser como el master pages */}
           <Route path="/" element={<AuthLayout />}>
-            {/* index, le dice que es el primer componente */}
+            {/* index, le dice que es el primer componente osea el primer componete/ruta que se mostrara */}
             <Route index element={<Login />} />
             <Route path="olvide-password" element={<OlvidePassword />} />
             <Route path="olvide-password/:token" element={<NuevoPassword />} />
@@ -41,6 +43,11 @@ function App() {
           <Route path="registrar" element={<Registrar/>}/>
           <Route path="confirmar/:id" element={<ConfirmarCuenta/>}/>
         </Route> */}
+
+        {/* Definimso otro grupo de rutas que seran protegidas/privadas */}
+        <Route path="/admin" element={<RutaProtegida/>}>
+          <Route index element={<AdministrarPacientes />} />
+        </Route>
 
         </Routes>
       </AuthProvider>
