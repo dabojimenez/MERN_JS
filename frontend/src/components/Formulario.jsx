@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Alerta from './Alerta';
+import usePacientes from '../hooks/usePacientes';
 
 function Formulario() {
     const [nombre, setNombre] = useState('');
@@ -9,6 +10,10 @@ function Formulario() {
     const [sintomas, setSintomas] = useState('');
 
     const [alerta, setAlerta] = useState({});
+
+    // Usamos el provider
+    const { guardarPaciente } = usePacientes();
+
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -20,6 +25,9 @@ function Formulario() {
             });
             return;
         }
+
+        setAlerta([])
+        guardarPaciente({nombre, propietario, email,fecha, sintomas})
     }
 
     const { msg } = alerta;
