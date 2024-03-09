@@ -44,7 +44,12 @@ const AuthProvider = ({children}) => {
         }
 
         autenticarUsuario();
-    }, [])
+    }, []);
+
+    const cerrarSesion = () => {
+        localStorage.removeItem('token');
+        setAuth({})
+    }
 
     
     return(
@@ -55,6 +60,7 @@ const AuthProvider = ({children}) => {
                 auth,
                 setAuth,
                 cargando, // lo hacemos disponible en los otros componentes
+                cerrarSesion
             }}
         >
             {/* Aqui se colocan todo los hijos que este rodeando el <AuthProvider> */}
