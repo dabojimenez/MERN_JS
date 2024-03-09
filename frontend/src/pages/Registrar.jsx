@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Alerta from '../components/Alerta';
-import axios from 'axios';
+import clienteAxios from '../config/axios';
+// import axios from 'axios';
+
 
 const Registrar = () => {
   // definimso el state para nombre y asi con los campos del formulario
@@ -34,12 +36,13 @@ const Registrar = () => {
     // Crear al usuario en la api
     try {
       // Importamos el valor de la variable de entorno
-      const urlBackend = import.meta.env.VITE_BACKEND_URL;
-      const url = `${urlBackend}/api/veterinarios`;
+      // const urlBackend = import.meta.env.VITE_BACKEND_URL;
+      // const url = `${clienteAxios}/veterinarios`;
+
       // axios.post => envia una peticion post
       // axios() => es una peticion get por defecto
       // el segundo argumento que toma es la data, pero podemos crear un objeto al vuelo
-      await axios.post(url, { nombre, email, password });
+      await clienteAxios.post('/veterinarios', { nombre, email, password });
       // Los CORS es una forma de proteger la API y esto se define en el bacend
       setAlerta({
         msg : 'Creado Correctamente, revisa tu email',

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom'; // el hook de useParams, nos permite leer los parametros de la ruta
-import axios from 'axios';
+// import axios from 'axios';
 import Alerta from '../components/Alerta';
+import clienteAxios from '../config/axios';
 
 const ConfirmarCuenta = () => {
   // UseState
@@ -17,8 +18,8 @@ const ConfirmarCuenta = () => {
   useEffect(() => {
     const confirmarCuenta = async () => {
       try {
-        const url = `${import.meta.env.VITE_BACKEND_URL}/api/veterinarios/confirmar/${id}`;
-        const { data } = await axios(url);
+        const url = `/veterinarios/confirmar/${id}`;
+        const { data } = await clienteAxios(url);
 
         setCuentaConfirmada(true);
         setAlerta({
