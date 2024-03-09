@@ -69,3 +69,7 @@ NodeMail
 Variables de entorno con Vite/React
     Al crear un proyecto con Vite, en este caso de react, vite tiene su propia gestion de variables de entorno, estas deben ser colocandose VITE_NOMBRE_VARIABLE_ENTORNO = VALOR
     De lo contrario si no tiene VITE_, no seran reconocidas.
+
+Context API
+    Nos permite almacenar un stado de forma global y poder reutilizarlas en otro lugar y es una alternativa a Redux.
+    Y este context nace de un provider, que es la fuente de los datos por asi decirlo.
