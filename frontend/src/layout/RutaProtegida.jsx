@@ -1,5 +1,7 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function RutaProtegida() {
     const { auth, cargando } = useAuth(); // extraemos toda la ifnromacion pertenenciente a ese context
@@ -11,12 +13,12 @@ function RutaProtegida() {
 
     return (
         <>
-            <h1>Esta es una ruta protegida</h1>
+            <Header/>
 
             {/* validmaos que si auth tiene la ifnromacion del usuario, muetsre e autlet, caso contrario se lo redirige a otra apgina con Navigate */}
             {/* auth?._id, le colocamos ?, permitiendo que no sea null y no truene la palicacion  */}
             {auth.veterinario?._id ? <Outlet /> : <Navigate to={'/'}/>}
-
+            <Footer/>
         </>
     )
 }

@@ -34,7 +34,8 @@ const AuthProvider = ({children}) => {
                 const { data } = await clienteAxios('/veterinarios/perfil', config);
                 setAuth(data); // enviamso al state la informacion del usuario
             } catch (error) {
-                console.log(error.esponse.data.msg);
+                console.log(error.response);
+                // console.log(error.esponse.data.msg);
                 setAuth({}); // si algo pasa lo mantendremos vacio
             }
 
