@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'; // importamos este componente, para evitar el spiner de carga al presionar en un link (NavLink) es lo mismo
+import useAuth from '../hooks/useAuth';
 
 const Login = () => {
+  const { auth } = useAuth(); // llamamos la función y obtenemos los valores que definimos en el contextprovider
+  console.log(auth);
   return (
     <>
 
