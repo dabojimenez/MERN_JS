@@ -8,6 +8,8 @@ const AuthContext = createContext();// tendra ciertas funciones para habilitar c
 const AuthProvider = ({children}) => {
     // Aqui arriba podemos definir el state que estara de forma global
     const [auth, setAuth] = useState({});
+    // para validar el inico d ela carga
+    const [cargando, setCargando] = useState(true);
 
     // useefect, para cuando cargue la app
     useEffect(() => {
@@ -15,6 +17,7 @@ const AuthProvider = ({children}) => {
             const token = localStorage.getItem('token');
             // si no hay un token detiene la ejecucion
             if (!token) {
+                setCargando(false);
                 return;
             }
 
@@ -26,15 +29,17 @@ const AuthProvider = ({children}) => {
                     Authorization: `Bearer ${token}`,
                 }
             }
-
+            
             try {
                 const { data } = await clienteAxios('/veterinarios/perfil', config);
-                
                 setAuth(data); // enviamso al state la informacion del usuario
             } catch (error) {
                 console.log(error.esponse.data.msg);
                 setAuth({}); // si algo pasa lo mantendremos vacio
             }
+
+            // Si ya finalizo la carga cambiamos el statado
+            setCargando(false);
         }
 
         autenticarUsuario();
@@ -47,7 +52,8 @@ const AuthProvider = ({children}) => {
             // le pasaos un objeto, y le indicamos que se pone a dispocicion. Podemos pasar funciones, que deben ser como expresions lambda
             value={{
                 auth,
-                setAuth
+                setAuth,
+                cargando, // lo hacemos disponible en los otros componentes
             }}
         >
             {/* Aqui se colocan todo los hijos que este rodeando el <AuthProvider> */}

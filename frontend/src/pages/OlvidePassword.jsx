@@ -18,7 +18,7 @@ const OlvidePassword = () => {
 
     try {
       const { data } = await clienteAxios.post('/veterinarios/olvide-password', { email });
-      console.log(data);
+      // console.log(data);
       setAlerta({
         msg: data.msg,
         error: false
