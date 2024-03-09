@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext} from 'react'; // createContext, nos permite crear un contexto para poder acceder al state de forma global
+import clienteAxios from '../config/axios';
 
 const AuthContext = createContext();// tendra ciertas funciones para habilitar contextApi
 
@@ -7,6 +8,37 @@ const AuthContext = createContext();// tendra ciertas funciones para habilitar c
 const AuthProvider = ({children}) => {
     // Aqui arriba podemos definir el state que estara de forma global
     const [auth, setAuth] = useState({});
+
+    // useefect, para cuando cargue la app
+    useEffect(() => {
+        const autenticarUsuario = async () => {
+            const token = localStorage.getItem('token');
+            // si no hay un token detiene la ejecucion
+            if (!token) {
+                return;
+            }
+
+            // creamos los headers
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    // le pasamos la autorización bearer
+                    Authorization: `Bearer ${token}`,
+                }
+            }
+
+            try {
+                const { data } = await clienteAxios('/veterinarios/perfil', config);
+                
+                setAuth(data); // enviamso al state la informacion del usuario
+            } catch (error) {
+                console.log(error.esponse.data.msg);
+                setAuth({}); // si algo pasa lo mantendremos vacio
+            }
+        }
+
+        autenticarUsuario();
+    }, [])
 
     
     return(
