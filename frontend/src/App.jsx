@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import OlvidePassword from "./pages/OlvidePassword";
 import Registrar from "./pages/Registrar";
 import ConfirmarCuenta from "./pages/ConfirmarCuenta";
+import NuevoPassword from "./pages/NuevoPassword";
 function App() {
 
   // Obtencion de los valores de variables de entorno
@@ -24,6 +25,7 @@ function App() {
         {/* index, le dice que es el primer componente */}
           <Route index element={<Login/>} />
           <Route path="olvide-password" element={<OlvidePassword/>}/>
+          <Route path="olvide-password/:token" element={<NuevoPassword/>}/>
           <Route path="registrar" element={<Registrar/>}/>
           <Route path="confirmar/:id" element={<ConfirmarCuenta/>}/>
         </Route>
