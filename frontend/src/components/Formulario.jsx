@@ -18,7 +18,7 @@ function Formulario() {
     const handleSubmit = e => {
         e.preventDefault();
         // Validar el formulario
-        if ([nombre, propietario, email,fecha, sintomas].includes('')) {
+        if ([nombre, propietario, email, fecha, sintomas].includes('')) {
             setAlerta({
                 msg: 'Todos los campos son Obligatorios',
                 error: true
@@ -27,18 +27,17 @@ function Formulario() {
         }
 
         setAlerta([])
-        guardarPaciente({nombre, propietario, email,fecha, sintomas})
+        guardarPaciente({ nombre, propietario, email, fecha, sintomas })
     }
 
     const { msg } = alerta;
     return (
         <>
-            <p className='text-lg text-center mb-10'>
-                Añade tus pacientes y
-                {' '}
-                <span className='text-indigo-600'>Administralos</span>
+            <h2 className='font-black text-3xl text-center'>Administrador de Pacientes</h2>
+            <p className='text-xl mt-5 mb-10 text-center'>
+                Añade tus pacientes y {''}
+                <span className='text-indigo-600 font-bold'>Administralos</span>
             </p>
-
             {/* Formulario de inputs */}
             <form
                 className='bg-white py-10 px-5 mb-10 lg:mb-5 shadow-md rounded-md'
@@ -130,7 +129,7 @@ function Formulario() {
                     className='bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors'
                 />
             </form>
-            {msg && <Alerta alerta={alerta}/>}
+            {msg && <Alerta alerta={alerta} />}
         </>
     )
 }
