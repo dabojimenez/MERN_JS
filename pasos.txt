@@ -26,3 +26,50 @@ Bcrypt
 Jsonwebtoken (JWT)
     Esta dependencia nos permitira generar y comprobar los json web tokens
     [npm install jsonwebtoken]
+
+REACT
+    [npm init vite@latest]
+    Con este comando se creara la palicacion de escritorio de react o vue
+
+Instlar Talwincss
+    [npm i --save-dev tailwindcss postcss autoprefixer]
+    Para isntalar tailwindcss
+    Nota: npx permite instalar ciertos paquetes sin instalar nada
+        [npx tailwindcss init -p]
+        Esto para crear los archivos de tailwindcss y realizaremos ajustes en el archivo tailwind.config.js
+            /** @type {import('tailwindcss').Config} */
+            export default {
+            content: [
+                "./index.html",
+                "./src/**/*.{js,ts,jsx,tsx}",
+            ],
+            theme: {
+                extend: {},
+            },
+            plugins: [],
+            }
+
+React Router DOM 6
+    Esta libreria nos permite tener varias paginas y poder tener varias paginas
+    [npm i react-router-dom]
+
+Axios
+    libreria que permite comunicarnos con una api a diferencia de fetch, que es nativa del navegador.
+    [npm install axios]
+
+Cors
+    Libreria que nos ayudara agregar los CORS en nuesra aplicacion backend.
+    [npm install cors]
+
+NodeMail
+    Libreria usada para poder enviar los corres electronicos
+    [npm install nodemailer]
+    Video 525 Primeros pasos para enviar un email de Confirmación de Cuenta y Video 526. Enviando el Email
+
+Variables de entorno con Vite/React
+    Al crear un proyecto con Vite, en este caso de react, vite tiene su propia gestion de variables de entorno, estas deben ser colocandose VITE_NOMBRE_VARIABLE_ENTORNO = VALOR
+    De lo contrario si no tiene VITE_, no seran reconocidas.
+
+Context API
+    Nos permite almacenar un stado de forma global y poder reutilizarlas en otro lugar y es una alternativa a Redux.
+    Y este context nace de un provider, que es la fuente de los datos por asi decirlo.

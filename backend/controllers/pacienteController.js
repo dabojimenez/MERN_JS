@@ -8,7 +8,7 @@ const agregarPaciente = async (req, res) => {
     try {
         // gUARDAMOS EN LA BASE DE DATOS
         const pacienteAlmacenado = await paciente.save();
-        res.json( pacienteAlmacenado );
+        res.json(pacienteAlmacenado);
     } catch (error) {
         console.log(error);
     }
@@ -16,24 +16,70 @@ const agregarPaciente = async (req, res) => {
 
 const obtenerPacientes = async (req, res) => {
     const pacientes = await Paciente.find()
-                        .where('veterinario').equals(req.veterinario); // le agregamos el filtro
+        .where('veterinario').equals(req.veterinario); // le agregamos el filtro
     res.json(pacientes);
 }
 
 const obtenerPaciente = async (req, res) => {
     const { id } = req.params;
     const paciente = await Paciente.findById(id);
-    
-    if (paciente.veterinario._id.toString() !== req.veterinario._id.toString()) {
-        return res.json({ msg:'Acción no valida'});
+
+    if (!paciente) {
+        return res.status(404).json({ msg: 'No encontrado' });
     }
 
-    if (paciente) {
-        res.json(paciente);
+    if (paciente.veterinario._id.toString() !== req.veterinario._id.toString()) {
+        return res.json({ msg: 'Acción no valida' });
+    }
+
+    res.json(paciente);
+}
+const actualizarPaciente = async (req, res) => {
+    const { id } = req.params;
+    const paciente = await Paciente.findById(id);
+
+    if (!paciente) {
+        return res.status(404).json({ msg: 'No encontrado' });
+    }
+
+    if (paciente.veterinario._id.toString() !== req.veterinario._id.toString()) {
+        return res.json({ msg: 'Acción no valida' });
+    }
+
+    // Actualizar paciente
+    // si un campo del body del req, no existe, le colocmaos el mismo valor
+    paciente.nombre = req.body.nombre || paciente.nombre;
+    paciente.propietario = req.body.propietario || paciente.propietario;
+    paciente.email = req.body.email || paciente.email;
+    paciente.fechaAlta = req.body.fechaAlta || paciente.fechaAlta;
+    paciente.sintomas = req.body.sintomas || paciente.sintomas;
+
+    try {
+        const pacienteActualizado = await paciente.save();
+        res.json(pacienteActualizado);
+    } catch (error) {
+        console.log(error);
     }
 }
-const actualizarPaciente = async (req, res) => {}
-const eliminarPaciente = async (req, res) => {}
+const eliminarPaciente = async (req, res) => {
+    const { id } = req.params;
+    const paciente = await Paciente.findById(id);
+
+    if (!paciente) {
+        return res.status(404).json({ msg: 'No encontrado' });
+    }
+
+    if (paciente.veterinario._id.toString() !== req.veterinario._id.toString()) {
+        return res.json({ msg: 'Acción no valida' });
+    }
+
+    try {
+        await paciente.deleteOne();
+        res.json({ msg:'Paciente eliminado'});
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 export {
