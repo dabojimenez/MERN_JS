@@ -33,7 +33,9 @@ const Registrar = () => {
 
     // Crear al usuario en la api
     try {
-      const url = 'http://localhost:4000/api/veterinarios';
+      // Importamos el valor de la variable de entorno
+      const urlBackend = import.meta.env.VITE_BACKEND_URL;
+      const url = `${urlBackend}/api/veterinarios`;
       // axios.post => envia una peticion post
       // axios() => es una peticion get por defecto
       // el segundo argumento que toma es la data, pero podemos crear un objeto al vuelo
