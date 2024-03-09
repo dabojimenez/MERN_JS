@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'; // importamos este compone
 import { useState } from 'react';
 import Alerta from '../components/Alerta';
 import clienteAxios from '../config/axios';
+import useAuth from '../hooks/useAuth';
 
 const Login = () => {
   // const { auth } = useAuth(); // llamamos la función y obtenemos los valores que definimos en el contextprovider
@@ -11,6 +12,8 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [alerta, setAlerta] = useState({});
+
+  const { setAuth } = useAuth();
 
   const navigate = useNavigate(); // para poder redirigir al usuario
 
@@ -29,7 +32,8 @@ const Login = () => {
     try {
       const { data } = await clienteAxios.post('/veterinarios/login', {email, password});
       // Almacenamso el token en localstorage
-      localStorage.setItem('token', data.token)
+      localStorage.setItem('token', data.token);
+      setAuth(data)
       // le navegamos al usuario
       navigate('/admin');// funcion que toma una ruta para redireccionar
     } catch (error) {

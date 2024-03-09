@@ -17,7 +17,7 @@ function RutaProtegida() {
 
             {/* validmaos que si auth tiene la ifnromacion del usuario, muetsre e autlet, caso contrario se lo redirige a otra apgina con Navigate */}
             {/* auth?._id, le colocamos ?, permitiendo que no sea null y no truene la palicacion  */}
-            {auth.veterinario?._id ? (<main className='container mx-auto mt-10'> <Outlet /> </main>) : <Navigate to={'/'}/>}
+            {auth?._id ? (<main className='container mx-auto mt-10'> <Outlet /> </main>) : <Navigate to={'/'}/>}
             <Footer/>
         </>
     )
