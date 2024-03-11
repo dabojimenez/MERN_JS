@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Alerta from './Alerta';
 import usePacientes from '../hooks/usePacientes';
 
@@ -8,11 +8,24 @@ function Formulario() {
     const [email, setEmail] = useState('');
     const [fecha, setFecha] = useState(Date.now());
     const [sintomas, setSintomas] = useState('');
+    const [id, setId] = useState(null);
 
     const [alerta, setAlerta] = useState({});
 
     // Usamos el provider
-    const { guardarPaciente } = usePacientes();
+    const { guardarPaciente, paciente } = usePacientes();
+
+    useEffect( () => {
+        // si no es null el nombre, procedemos a mostrar los datos
+        if (paciente?.nombre) {
+            setNombre(paciente.nombre);
+            setPropietario(paciente.propietario);
+            setEmail(paciente.email);
+            setFecha(paciente.fechaAlta);
+            setSintomas(paciente.sintomas);
+            setId(paciente._id);
+        }
+    }, [paciente])
 
 
     const handleSubmit = e => {
@@ -27,7 +40,17 @@ function Formulario() {
         }
 
         setAlerta([])
-        guardarPaciente({ nombre, propietario, email, fecha, sintomas })
+        guardarPaciente({ nombre, propietario, email, fecha, sintomas, id })
+        setAlerta({
+            msg: 'Guardado Correctamente'
+        })
+        // Reiniciamos los valores
+        setNombre('')
+        setEmail('')
+        setPropietario('');
+        setFecha('');
+        setSintomas('')
+        setId('');
     }
 
     const { msg } = alerta;
@@ -125,7 +148,8 @@ function Formulario() {
 
                 <input
                     type='submit'
-                    value={'Agregar Paciente'}
+                    // Agregamos una validacion para mostrar los datos, si el id no e snull mostramos guardar cmabios
+                    value={ id ? 'Guardar Cambios' : 'Agregar Paciente'}
                     className='bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors'
                 />
             </form>
